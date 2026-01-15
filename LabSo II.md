@@ -32,7 +32,9 @@
 ## 10/10/25
 - Proves amb sensors d'ultrasons HC-SR204 i Arduino
 - El problema amb sensors d'aquests és que tenen un feix molt prim (de 15º d'obertura). Per tant, per tenir una superfície de, diguem, 15cm, necessitaríem posar-los a uns 80'5 cm.
- ![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/CamScanner_11-13-2025_17.30_1.jpg]]
+  
+ ![img](/Attachments/CamScanner_11-13-2025_17.30_1.jpg)
+ 
  ```java
  void loop() {
     // Measure distance for the first sensor
@@ -76,7 +78,7 @@
 - Proves amb el sensor VL53L0X. La idea és moure dos sensors amb servos i calcular les diferències de temps entre la detecció de l'objecte en els diferents sensors. 
     - D'aquesta manera, podríem comparar els càlculs de posició amb les dues mesures i tenir un resultat més fiable.
     - També ens permetria tenir més d'un objecte sense tenir zones mortes, en què un objecte n'eclipsa un altre.
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/CamScanner_11-13-2025_17.30_2.jpg]]
+![img](/Attachments/CamScanner_11-13-2025_17.30_2.jpg)
 - Setup bàsic i proves amb dos sensors i una ESP32, sense servos, per a entendre el funcionament dels sensors i fer-me una idea de la seva sensibilitat i fiabilitat.
     - Els sensors VL53L0X es comuniquen per I2C amb la ESP32, el que ens permet tenir-ne més d'un connectat als mateixos pins de la ESP32:
 ```java
@@ -144,16 +146,16 @@ if ( myPort.available() > 0)
 
 ```
 
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/VID_20251023_191106364.mp4]]
+![img](/Attachments/VID_20251023_191106364.mp4)
 - Els sensors, amb aquest setup, tenen molt de soroll.
 - Fem el càlcul de la posició amb trigonometria bàsica:
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/CamScanner_11-13-2025_17.30_3.jpg]]
+![img](/Attachments/CamScanner_11-13-2025_17.30_3.jpg)
 - Els resultats no son gaire fiables, ja que sumem el soroll dels dos sensors (els multipliquem, de fet)
 ## 31/10/2025
 - Primeres proves amb servos.
 - Reducció del setup a només un servo i un sensor, per simplicitat.
 - Amb una bona lectura d'un sensor podem obtenir la posició d'un objecte.
-- ![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/VID_20251106_190028353.mp4]]
+- ![img](/Attachments/VID_20251106_190028353.mp4)
 - Fent servir la llibreria `ESP32Servo` i `VL53L0X`.
 
 ```java
@@ -193,7 +195,7 @@ void loop() {
 ```
 
 - Les mesures funcionen, però el soroll + imprecisions al càlcul (assumint que el feix del sensor és linear, quan realment és de 25º) fan que els càlculs encara no siguin fiables
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/VID_20251106_190529295.mp4]]
+![img](/Attachments/VID_20251106_190529295.mp4)
 ## 07/11/2025
 - Més proves amb el mateix setup
 - Intent d'smoothing de les mesures fent la mitjana entre la lectura anterior i l'actual.
@@ -244,7 +246,7 @@ void loop() {
 ```
 
 - Desastre
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/IMG_20251113_171246846.jpg]]
+![img](/Attachments/IMG_20251113_171246846.jpg)
 ## 14/11/2025
 - Seguim provant amb els servos, tenint en compte dos aprenentatges: 
     - No els hi agraden els valors negatius
@@ -308,27 +310,27 @@ void loop() {
 - Recuperació del model amb un servo i un VL530X.
 - Anàlisi de les lectures amb el codi actual:
 - Lectures d'un sol cicle (moviment de 0º -> 90º -> 0º):
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/dist_vs_angle.png]]
+![img](/Attachments/dist_vs_angle.png)
 
 - Com es pot observar, els valors de l'anada i de la tornada son completament diferents. El que és pitjor, l'objecte, en aquesta prova, estava a uns 45º.
 - No podem extreure cap patró d'aquesta conducta, excepte que caldrà trobar la manera d'incloure el feix de 25º del sensor dins dels càlculs, d'alguna manera.
 - Comparant-lo amb un gràfic de fa unes setmanes (d'una prova diferent, però amb comparació d'anada vs tornada):
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/dist_vs_angle_1.png]]
+![img](/Attachments/dist_vs_angle_1.png)
 ## 19/12/2025
 - Més mesures i més anàlisis de les mesures
 - Mesura de la lectura del sensor amb cap objecte davant:
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/blank.png]]
+![img](/Attachments/blank.png)
 ## Vacances de Nadal
 - Replantejament de la metodologia: en comptes d'algún sensor, es farà la detecció amb una càmera i anàlisi d'imatge amb Processing
 - Per la càmera, utilitzo una [ESP32-CAM](https://www.tiendatec.es/electronica/placas-de-desarrollo/2072-esp32-cam-placa-esp32-con-camara-ov2640-wifi-bt-8472496025850.html), un mòdul ESP32 amb un sensor de càmera
 - La idea és capturar una imatge, enviar-la a Processing d'alguna manera, analitzar-la per trobar on hi ha un objecte, i enviar un missatge MIDI CC.
 - El setup és el següent
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/Pasted_image_20260114203024.png]]
+![img](/Attachments/Pasted_image_20260114203024.png)
 - L'objecte té un imant a la base, i a sota de la superfície hi ha un altre imant enganxat a un paper de color
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/VID_20260114_203153947.mp4]]
+![img](/Attachments/VID_20260114_203153947.mp4)
 - La construcció de la caixa és molt rudimentària, però el resultat final compleix la funció:
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/IMG_20260114_105852.jpg]]
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/IMG_20260115_100738583.jpg]]
+![img](/Attachments/IMG_20260114_105852.jpg)
+![img](/Attachments/IMG_20260115_100738583.jpg)
 - La programació de l'ESP32-CAM necessita la [llibreria d'expressif](https://github.com/espressif/esp32-camera/tree/master), mal documentada i confosa
 - Per fer la foto, adapto el codi d'[aquesta guia](https://randomnerdtutorials.com/esp32-cam-take-photo-save-microsd-card/), però no la guardo a una targeta SD.
 - Per la comunicació amb Processing, enviaré la foto pel port Serial.
@@ -709,19 +711,19 @@ public void sendMidi(averageCoordinates coordinates, int chan, int cc){
 ```
 
 - A Max, rebo els missatges MIDI i recreo la posició de les tres peces utilitzant l'objecte `pictslider`
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/Pasted_image_20260114204259.png]]
+![img](/Attachments/Pasted_image_20260114204259.png)
 - Afegint comunicació amb Ableton Live (ajudant-me d'[aquest tutorial](https://www.youtube.com/watch?v=Wy3SYumK5Vg), he transformat el patch de Max en un patch de Max For Live, el que ofereix la possibilitat de mapejar qualsevol de les coordenades de qualsevol dels punts a qualsevol paràmetre dins de Live.
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/Pasted_image_20260115100258.png]]
+![img](/Attachments/Pasted_image_20260115100258.png)
 - El resultat final és un dispositiu que envia missatges MIDI, per tant, les seves aplicacions no estàn limitades als patchos de Max que he dissenyat. També se li pot donar ús dins del VCV Rack, altres DAWs o programes que acceptin MIDI.
-![[https://github.com/papertree1/multiXY/blob/c9f9bedf0d03823562d33267b557cb63bc7b1882/Attachments/VID_20260115_102055318.mp4]]
+![img](/Attachments/VID_20260115_102055318.mp4)
 # Conclusions
 Aquest LabSo ha sigut, per mi, una lliçó enorme en paciència i en saber buscar maneres alternatives. La gran majoria de la feina ha sigut recerca de diferents eines, proves i "fracassos" (en el sentit de no aconseguir de les eines allò que buscava). De totes maneres, m'ha servit moltíssim per a trobar metodologies de recerca de diferents sensors i maneres, per a aprendre a fer mesures que m'aportin informació rellevant sobre el sensor que estava provant, i per trobar un mètode de treball quan res funcionava.
 La decisió final de fer servir una càmera en comptes de les altres opcions de sensors va ser encertada pel projecte en un marc de LabSo, però si hagués tingut més temps m'hagués agradat trobar una manera més "mecànica" que no depengués tant del software. A més, la implementació que tinc amb la càmera és poc pràctica com a dispositiu MIDI, ja que és enorme (al final fa 15x15x20cm). Les implementacions que intentava amb sensors com el VL530X eren més elegants, en la meva opinió, i s'adherien més a la idea incial del projecte.
 
 Quant als objectius proposats a principi del projecte, els he complert la majoria:
--     Detecció precisa de la posició d'un objecte en un pla.
--     Quan s'aconsegueixi, detecció precisa i diferenciada de més d'un objecte en un pla.
--     Resolució de <1cm.
--     Latència de <150ms. (?)
--     Comunicació a temps real amb un patch de Max/MSP.
+- Detecció precisa de la posició d'un objecte en un pla
+- Quan s'aconsegueixi, detecció precisa i diferenciada de més d'un objecte en un pla.
+- Resolució de <1cm.
+- Latència de <150ms. (?)
+- Comunicació a temps real amb un patch de Max/MSP.
 L'únic que no he pogut assolir és el de la latència. Actualment, aquesta implementació té una latència d'uns 450-500ms, que es nota moltíssim a l'hora de fer servir el dispositiu i és el defecte més gran del disseny, ja que elimina completament les possibilitats de fer-lo servir en directe de manera precisa.
