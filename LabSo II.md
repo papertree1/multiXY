@@ -146,7 +146,7 @@ if ( myPort.available() > 0)
 
 ```
 
-![img](/Attachments/VID_20251023_191106364.mp4)
+[![img](/Attachments/videoPlay.jpeg)](/Attachments/VID_20251023_191106364.mp4)
 - Els sensors, amb aquest setup, tenen molt de soroll.
 - Fem el càlcul de la posició amb trigonometria bàsica:
 ![img](/Attachments/CamScanner_11-13-2025_17.30_3.jpg)
@@ -155,7 +155,7 @@ if ( myPort.available() > 0)
 - Primeres proves amb servos.
 - Reducció del setup a només un servo i un sensor, per simplicitat.
 - Amb una bona lectura d'un sensor podem obtenir la posició d'un objecte.
-- ![img](/Attachments/VID_20251106_190028353.mp4)
+[![img](/Attachments/videoPlay.jpeg)](/Attachments/VID_20251106_190028353.mp4)
 - Fent servir la llibreria `ESP32Servo` i `VL53L0X`.
 
 ```java
@@ -195,7 +195,7 @@ void loop() {
 ```
 
 - Les mesures funcionen, però el soroll + imprecisions al càlcul (assumint que el feix del sensor és linear, quan realment és de 25º) fan que els càlculs encara no siguin fiables
-![img](/Attachments/VID_20251106_190529295.mp4)
+[![img](/Attachments/videoPlay.jpeg)](/Attachments/VID_20251106_190529295.mp4)
 ## 07/11/2025
 - Més proves amb el mateix setup
 - Intent d'smoothing de les mesures fent la mitjana entre la lectura anterior i l'actual.
@@ -327,7 +327,7 @@ void loop() {
 - El setup és el següent
 ![img](/Attachments/Pasted_image_20260114203024.png)
 - L'objecte té un imant a la base, i a sota de la superfície hi ha un altre imant enganxat a un paper de color
-![img](/Attachments/VID_20260114_203153947.mp4)
+[![img](/Attachments/videoPlay.jpeg)](/Attachments/VID_20260114_203153947.mp4)
 - La construcció de la caixa és molt rudimentària, però el resultat final compleix la funció:
 ![img](/Attachments/IMG_20260114_105852.jpg)
 ![img](/Attachments/IMG_20260115_100738583.jpg)
@@ -715,7 +715,7 @@ public void sendMidi(averageCoordinates coordinates, int chan, int cc){
 - Afegint comunicació amb Ableton Live (ajudant-me d'[aquest tutorial](https://www.youtube.com/watch?v=Wy3SYumK5Vg), he transformat el patch de Max en un patch de Max For Live, el que ofereix la possibilitat de mapejar qualsevol de les coordenades de qualsevol dels punts a qualsevol paràmetre dins de Live.
 ![img](/Attachments/Pasted_image_20260115100258.png)
 - El resultat final és un dispositiu que envia missatges MIDI, per tant, les seves aplicacions no estàn limitades als patchos de Max que he dissenyat. També se li pot donar ús dins del VCV Rack, altres DAWs o programes que acceptin MIDI.
-![img](/Attachments/VID_20260115_102055318.mp4)
+[![img](/Attachments/videoPlay.jpeg)](/Attachments/VID_20260115_102055318.mp4)
 # Conclusions
 Aquest LabSo ha sigut, per mi, una lliçó enorme en paciència i en saber buscar maneres alternatives. La gran majoria de la feina ha sigut recerca de diferents eines, proves i "fracassos" (en el sentit de no aconseguir de les eines allò que buscava). De totes maneres, m'ha servit moltíssim per a trobar metodologies de recerca de diferents sensors i maneres, per a aprendre a fer mesures que m'aportin informació rellevant sobre el sensor que estava provant, i per trobar un mètode de treball quan res funcionava.
 La decisió final de fer servir una càmera en comptes de les altres opcions de sensors va ser encertada pel projecte en un marc de LabSo, però si hagués tingut més temps m'hagués agradat trobar una manera més "mecànica" que no depengués tant del software. A més, la implementació que tinc amb la càmera és poc pràctica com a dispositiu MIDI, ja que és enorme (al final fa 15x15x20cm). Les implementacions que intentava amb sensors com el VL530X eren més elegants, en la meva opinió, i s'adherien més a la idea incial del projecte.
